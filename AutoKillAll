@@ -1,0 +1,124 @@
+--Made by kur
+
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local LabelMain = Instance.new("TextLabel")
+local ScriptMain = Instance.new("TextButton")
+local Info1 = Instance.new("TextLabel")
+local Info2 = Instance.new("TextLabel")
+local DestroyGUI = Instance.new("TextButton")
+
+--Properties:
+
+ScreenGui.Parent = game.CoreGui
+
+Frame.Parent = ScreenGui
+Frame.Active = true
+Frame.BackgroundColor3 = Color3.fromRGB(54, 54, 54)
+Frame.Position = UDim2.new(0.209374994, 0, 0.137037039, 0)
+Frame.Size = UDim2.new(0, 545, 0, 263)
+
+LabelMain.Name = "LabelMain"
+LabelMain.Parent = Frame
+LabelMain.BackgroundColor3 = Color3.fromRGB(43, 43, 43)
+LabelMain.Position = UDim2.new(-0.0018348624, 0, 0, 0)
+LabelMain.Size = UDim2.new(0, 545, 0, 50)
+LabelMain.Font = Enum.Font.SourceSans
+LabelMain.Text = "AutoKillAll: by ! + kur#6666"
+LabelMain.TextColor3 = Color3.fromRGB(0, 0, 0)
+LabelMain.TextSize = 14.000
+
+ScriptMain.Name = "ScriptMain"
+ScriptMain.Parent = Frame
+ScriptMain.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
+ScriptMain.Position = UDim2.new(0.275229365, 0, 0.376425862, 0)
+ScriptMain.Size = UDim2.new(0, 244, 0, 90)
+ScriptMain.Font = Enum.Font.GothamBlack
+ScriptMain.Text = "Toggle Script On"
+ScriptMain.TextColor3 = Color3.fromRGB(0, 0, 0)
+ScriptMain.TextSize = 14.000
+ScriptMain.MouseButton1Down:connect(function()
+	local Player = game:GetService("Players").LocalPlayer
+	local Mouse = Player:GetMouse()
+	local Camera = game:GetService("Workspace").CurrentCamera
+	while wait(0.5) do
+		for i, v in pairs(game:GetService("Players"):GetPlayers()) do
+			if  v.Character ~= nil and v.Character:FindFirstChild("HumanoidRootPart") ~= nil and v.Character:FindFirstChild("Humanoid") ~= nil then
+				coroutine.wrap(function()
+					if v.Name ~= Player.Name and v.Character ~= nil and v.Character:FindFirstChild("HumanoidRootPart") ~= nil and v.Character:FindFirstChild("Humanoid") ~= nil then
+						local a1 = "HandleDamage"
+						local a2 = {
+							["Character"] = v.Character,
+							["Hit"] = v.Character.HumanoidRootPart,
+							["Type"] = "Normal",
+							["Norm"] = Vector3.new(0, 0, 0),
+							["Pos"] = v.Character.HumanoidRootPart.Position,
+							["SpellName"] = "fiendfyre"
+						}
+
+						game:GetService("ReplicatedStorage").Modules.Network.RemoteEvent:FireServer(a1, a2)
+						wait(0.1)
+					end
+
+				end)()
+			end
+		end
+	end --made by kur! :D
+end)
+
+Info1.Name = "Info1"
+Info1.Parent = Frame
+Info1.Active = true
+Info1.BackgroundColor3 = Color3.fromRGB(54, 54, 54)
+Info1.Position = UDim2.new(0, 0, 0.809885919, 0)
+Info1.Size = UDim2.new(0, 200, 0, 50)
+Info1.Font = Enum.Font.GothamBold
+Info1.Text = "I'm only a beginner coder, so please don't be too harsh if this isn't so good :)"
+Info1.TextColor3 = Color3.fromRGB(0, 0, 0)
+Info1.TextScaled = true
+Info1.TextSize = 14.000
+Info1.TextWrapped = true
+
+Info2.Name = "Info2"
+Info2.Parent = Frame
+Info2.BackgroundColor3 = Color3.fromRGB(54, 54, 54)
+Info2.Position = UDim2.new(0, 0, 0.190114066, 0)
+Info2.Size = UDim2.new(0, 78, 0, 28)
+Info2.Font = Enum.Font.SourceSans
+Info2.Text = "Enjoy!"
+Info2.TextColor3 = Color3.fromRGB(0, 0, 0)
+Info2.TextSize = 14.000
+
+DestroyGUI.Name = "DestroyGUI"
+DestroyGUI.Parent = Frame
+DestroyGUI.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+DestroyGUI.Position = UDim2.new(0.913761497, 0, 0, 0)
+DestroyGUI.Size = UDim2.new(0, 47, 0, 50)
+DestroyGUI.Font = Enum.Font.GothamBold
+DestroyGUI.Text = "X"
+DestroyGUI.TextColor3 = Color3.fromRGB(0, 0, 0)
+DestroyGUI.TextSize = 33.000
+
+-- Scripts:
+
+local function RFKI_fake_script() -- DestroyGUI.LocalScript 
+	local script = Instance.new('LocalScript', DestroyGUI)
+
+	script.Parent.MouseButton1Down:Connect(function()
+		script.Parent.Parent.Visible = false
+	end)
+end
+coroutine.wrap(RFKI_fake_script)()
+local function LDDQF_fake_script() -- Frame.LocalScript 
+	local script = Instance.new('LocalScript', Frame)
+
+	Frame.Active = true
+	Frame.Draggable = true
+end
+coroutine.wrap(LDDQF_fake_script)()
+local function QWODZ_fake_script() -- ScreenGui.LocalScript 
+	local script = Instance.new('LocalScript', ScreenGui)
+
+	ScreenGui.ResetOnSpawn = false
+end
+coroutine.wrap(QWODZ_fake_script)()
