@@ -1,5 +1,5 @@
---AutoKillALL: by kur
---V1
+--AutoKillAll Gui, by kur
+--V3
 
 -- Instances:
 
@@ -8,18 +8,21 @@ local Frame = Instance.new("Frame")
 local Toggle = Instance.new("TextButton")
 local UIGradient = Instance.new("UIGradient")
 local UICorner = Instance.new("UICorner")
-local UIGradient_2 = Instance.new("UIGradient")
 local UICorner_2 = Instance.new("UICorner")
 local Close = Instance.new("TextButton")
-local UIGradient_3 = Instance.new("UIGradient")
 local UICorner_3 = Instance.new("UICorner")
 local TextLabel = Instance.new("TextLabel")
+local UIGradient_2 = Instance.new("UIGradient")
 local Title = Instance.new("TextLabel")
-local UIGradient_4 = Instance.new("UIGradient")
+local UIGradient_3 = Instance.new("UIGradient")
 local UICorner_4 = Instance.new("UICorner")
-local Open = Instance.new("TextButton")
-local UIGradient_5 = Instance.new("UIGradient")
+local PlayerRadar = Instance.new("TextButton")
 local UICorner_5 = Instance.new("UICorner")
+local UIGradient_4 = Instance.new("UIGradient")
+local UIGradient_5 = Instance.new("UIGradient")
+local Open = Instance.new("TextButton")
+local UIGradient_6 = Instance.new("UIGradient")
+local UICorner_6 = Instance.new("UICorner")
 local TextLabel_2 = Instance.new("TextLabel")
 
 --Properties:
@@ -35,11 +38,11 @@ Frame.Visible = false
 Toggle.Name = "Toggle"
 Toggle.Parent = Frame
 Toggle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Toggle.Position = UDim2.new(0.281833619, 0, 0.383211672, 0)
-Toggle.Size = UDim2.new(0, 257, 0, 80)
+Toggle.Position = UDim2.new(0.0475381911, 0, 0.364963502, 0)
+Toggle.Size = UDim2.new(0, 257, 0, 102)
 Toggle.Font = Enum.Font.GothamBold
-Toggle.Text = "On"
-Toggle.TextColor3 = Color3.fromRGB(0, 0, 0)
+Toggle.Text = "Toggle LoopKIllAll"
+Toggle.TextColor3 = Color3.fromRGB(0, 0, 255)
 Toggle.TextScaled = true
 Toggle.TextSize = 14.000
 Toggle.TextWrapped = true
@@ -77,9 +80,6 @@ UIGradient.Parent = Toggle
 
 UICorner.Parent = Toggle
 
-UIGradient_2.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 85, 0)), ColorSequenceKeypoint.new(0.41, Color3.fromRGB(218, 74, 57)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(91, 37, 255))}
-UIGradient_2.Parent = Frame
-
 UICorner_2.Parent = Frame
 
 Close.Name = "Close"
@@ -91,9 +91,6 @@ Close.Font = Enum.Font.SourceSans
 Close.Text = ""
 Close.TextColor3 = Color3.fromRGB(0, 0, 0)
 Close.TextSize = 14.000
-
-UIGradient_3.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 0, 0)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 0, 0))}
-UIGradient_3.Parent = Close
 
 UICorner_3.Parent = Close
 
@@ -109,22 +106,191 @@ TextLabel.TextScaled = true
 TextLabel.TextSize = 14.000
 TextLabel.TextWrapped = true
 
+UIGradient_2.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 0, 0)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 0, 0))}
+UIGradient_2.Parent = Close
+
 Title.Name = "Title"
 Title.Parent = Frame
 Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Title.Position = UDim2.new(0, 0, 0.00364963501, 0)
 Title.Size = UDim2.new(0, 534, 0, 53)
 Title.Font = Enum.Font.SourceSansBold
-Title.Text = "AutoKillAll, by ! + kur#6666"
-Title.TextColor3 = Color3.fromRGB(0, 0, 0)
+Title.Text = "AutoKillAll + Player Radar, by ! + kur#6666"
+Title.TextColor3 = Color3.fromRGB(0, 0, 255)
 Title.TextScaled = true
 Title.TextSize = 14.000
 Title.TextWrapped = true
 
-UIGradient_4.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 85, 0)), ColorSequenceKeypoint.new(0.41, Color3.fromRGB(218, 74, 57)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(91, 37, 255))}
-UIGradient_4.Parent = Title
+UIGradient_3.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 85, 0)), ColorSequenceKeypoint.new(0.41, Color3.fromRGB(218, 74, 57)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(91, 37, 255))}
+UIGradient_3.Parent = Title
 
 UICorner_4.Parent = Title
+
+PlayerRadar.Name = "PlayerRadar"
+PlayerRadar.Parent = Frame
+PlayerRadar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+PlayerRadar.Position = UDim2.new(0.521222413, 0, 0.375912428, 0)
+PlayerRadar.Size = UDim2.new(0, 251, 0, 99)
+PlayerRadar.Font = Enum.Font.GothamBold
+PlayerRadar.Text = "Toggle Player Radar"
+PlayerRadar.TextColor3 = Color3.fromRGB(0, 0, 255)
+PlayerRadar.TextScaled = true
+PlayerRadar.TextSize = 14.000
+PlayerRadar.TextWrapped = true
+PlayerRadar.MouseButton1Click:Connect(function()
+	print("clicked") local Players = game:service("Players")
+	local Player = Players.LocalPlayer
+	local Camera = game:service("Workspace").CurrentCamera
+	local RS = game:service("RunService")
+
+	local function NewCircle(Transparency, Color, Radius, Filled, Thickness)
+		local c = Drawing.new("Circle")
+		c.Transparency = Transparency
+		c.Color = Color
+		c.Visible = false
+		c.Thickness = Thickness
+		c.Position = Vector2.new(0, 0)
+		c.Radius = Radius
+		c.NumSides = math.clamp(Radius*55/100, 10, 75)
+		c.Filled = Filled
+		return c
+	end
+
+	local RadarInfo = {
+		Position = Vector2.new(200, 200),
+		Radius = 100,
+		Scale = 1, -- Determinant factor on the effect of the relative position for the 2D integration
+		RadarBack = Color3.fromRGB(10, 10, 10),
+		RadarBorder = Color3.fromRGB(75, 75, 75),
+		LocalPlayerDot = Color3.fromRGB(255, 255, 255),
+		PlayerDot = Color3.fromRGB(60, 170, 255),
+		Team = Color3.fromRGB(0, 255, 0),
+		Enemy = Color3.fromRGB(255, 0, 0),
+		Team_Check = true
+	}
+
+	local RadarBackground = NewCircle(0.9, RadarInfo.RadarBack, RadarInfo.Radius, true, 1)
+	RadarBackground.Visible = true
+	RadarBackground.Position = RadarInfo.Position
+
+	local RadarBorder = NewCircle(0.75, RadarInfo.RadarBorder, RadarInfo.Radius, false, 3)
+	RadarBorder.Visible = true
+	RadarBorder.Position = RadarInfo.Position
+
+	local function GetRelative(pos)
+		if Player.Character ~= nil and Player.Character.PrimaryPart ~= nil then
+			local pmpart = Player.Character.PrimaryPart
+			local camerapos = Vector3.new(Camera.CFrame.Position.X, pmpart.Position.Y, Camera.CFrame.Position.Z)
+			local newcf = CFrame.new(pmpart.Position, camerapos)
+			local r = newcf:PointToObjectSpace(pos)
+			return r.X, r.Z
+		else
+			return 0, 0
+		end
+	end
+
+	local function PlaceDot(plr)
+		local PlayerDot = NewCircle(1, RadarInfo.PlayerDot, 3, true, 1)
+
+		local function Update()
+			local c 
+			c = game:service("RunService").RenderStepped:Connect(function()
+				if plr.Character and plr.Character:FindFirstChildOfClass("Humanoid") and plr.Character.PrimaryPart ~= nil and plr.Character:FindFirstChildOfClass("Humanoid").Health > 0 then
+					local scale = RadarInfo.Scale
+					local relx, rely = GetRelative(plr.Character.PrimaryPart.Position)
+					local newpos = RadarInfo.Position - Vector2.new(relx * scale, rely * scale) 
+
+					if (newpos - RadarInfo.Position).magnitude < RadarInfo.Radius-2 then      
+						PlayerDot.Position = newpos
+
+						PlayerDot.Color = RadarInfo.PlayerDot
+						if RadarInfo.Team_Check then
+							if plr.TeamColor == Player.TeamColor then
+								PlayerDot.Color = RadarInfo.Team
+							else
+								PlayerDot.Color = RadarInfo.Enemy
+							end
+						end
+
+						PlayerDot.Visible = true
+					else 
+						PlayerDot.Visible = false
+					end
+				else 
+					PlayerDot.Visible = false
+					if Players:FindFirstChild(plr.Name) == nil then
+						PlayerDot:Remove()
+						c:Disconnect()
+					end
+				end
+			end)
+		end
+		coroutine.wrap(Update)()
+	end
+
+	for _,v in pairs(Players:GetChildren()) do
+		if v.Name ~= Player.Name then
+			PlaceDot(v)
+		end
+	end
+
+	local function NewLocalDot()
+		local d = Drawing.new("Triangle")
+		d.Visible = true
+		d.Thickness = 1
+		d.Filled = true
+		d.Color = RadarInfo.LocalPlayerDot
+		d.PointA = RadarInfo.Position + Vector2.new(0, -6)
+		d.PointB = RadarInfo.Position + Vector2.new(-3, 6)
+		d.PointC = RadarInfo.Position + Vector2.new(3, 6)
+		return d
+	end
+
+	local LocalPlayerDot = NewLocalDot()
+
+	Players.PlayerAdded:Connect(function(v)
+		if v.Name ~= Player.Name then
+			PlaceDot(v)
+		end
+		LocalPlayerDot:Remove()
+		LocalPlayerDot = NewLocalDot()
+	end)
+
+	-- Loop
+	coroutine.wrap(function()
+		local c 
+		c = game:service("RunService").RenderStepped:Connect(function()
+			if LocalPlayerDot ~= nil then
+				LocalPlayerDot.Color = RadarInfo.LocalPlayerDot
+				LocalPlayerDot.PointA = RadarInfo.Position + Vector2.new(0, -6)
+				LocalPlayerDot.PointB = RadarInfo.Position + Vector2.new(-3, 6)
+				LocalPlayerDot.PointC = RadarInfo.Position + Vector2.new(3, 6)
+			end
+			RadarBackground.Position = RadarInfo.Position
+			RadarBackground.Radius = RadarInfo.Radius
+			RadarBackground.Color = RadarInfo.RadarBack
+
+			RadarBorder.Position = RadarInfo.Position
+			RadarBorder.Radius = RadarInfo.Radius
+			RadarBorder.Color = RadarInfo.RadarBorder
+		end)
+	end)()
+
+--[[ Example:
+wait(3)
+RadarInfo.Position = Vector2.new(300, 300)
+RadarInfo.Radius = 150
+RadarInfo.RadarBack = Color3.fromRGB(50, 0, 0)
+]]
+end) 
+
+UICorner_5.Parent = PlayerRadar
+
+UIGradient_4.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 85, 0)), ColorSequenceKeypoint.new(0.41, Color3.fromRGB(218, 74, 57)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(91, 37, 255))}
+UIGradient_4.Parent = PlayerRadar
+
+UIGradient_5.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 85, 0)), ColorSequenceKeypoint.new(0.41, Color3.fromRGB(218, 74, 57)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(91, 37, 255))}
+UIGradient_5.Parent = Frame
 
 Open.Name = "Open"
 Open.Parent = ScreenGui
@@ -136,10 +302,10 @@ Open.Text = ""
 Open.TextColor3 = Color3.fromRGB(0, 0, 0)
 Open.TextSize = 14.000
 
-UIGradient_5.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 85, 0)), ColorSequenceKeypoint.new(0.41, Color3.fromRGB(218, 74, 57)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(91, 37, 255))}
-UIGradient_5.Parent = Open
+UIGradient_6.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 85, 0)), ColorSequenceKeypoint.new(0.41, Color3.fromRGB(218, 74, 57)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(91, 37, 255))}
+UIGradient_6.Parent = Open
 
-UICorner_5.Parent = Open
+UICorner_6.Parent = Open
 
 TextLabel_2.Parent = Open
 TextLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -147,14 +313,14 @@ TextLabel_2.BackgroundTransparency = 1.000
 TextLabel_2.Size = UDim2.new(1, 0, 1, 0)
 TextLabel_2.Font = Enum.Font.GothamBold
 TextLabel_2.Text = "OPEN"
-TextLabel_2.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_2.TextColor3 = Color3.fromRGB(0, 0, 255)
 TextLabel_2.TextScaled = true
 TextLabel_2.TextSize = 14.000
 TextLabel_2.TextWrapped = true
 
 -- Scripts:
 
-local function JCSLX_fake_script() -- Close.LocalScript 
+local function YAURRF_fake_script() -- Close.LocalScript 
 	local script = Instance.new('LocalScript', Close)
 
 	local Frame = script.Parent.Parent
@@ -163,15 +329,15 @@ local function JCSLX_fake_script() -- Close.LocalScript
 		Frame.Visible = false
 	end)
 end
-coroutine.wrap(JCSLX_fake_script)()
-local function DMAWFX_fake_script() -- Frame.LocalScript 
+coroutine.wrap(YAURRF_fake_script)()
+local function YYLAUB_fake_script() -- Frame.LocalScript 
 	local script = Instance.new('LocalScript', Frame)
 
 	script.Parent.Active = true
 	script.Parent.Draggable = true
 end
-coroutine.wrap(DMAWFX_fake_script)()
-local function JRFMN_fake_script() -- Open.LocalScript 
+coroutine.wrap(YYLAUB_fake_script)()
+local function XSWEYCL_fake_script() -- Open.LocalScript 
 	local script = Instance.new('LocalScript', Open)
 
 	local Frame = script.Parent.Parent.Frame
@@ -180,4 +346,4 @@ local function JRFMN_fake_script() -- Open.LocalScript
 		Frame.Visible = true
 	end)
 end
-coroutine.wrap(JRFMN_fake_script)()
+coroutine.wrap(XSWEYCL_fake_script)()
